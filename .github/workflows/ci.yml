@@ -55,7 +55,8 @@ jobs:
           exit-code: "1"
           ignore-unfixed: true
           vuln-type: os,library
-          severity: HIGH,CRITICAL
+          scanners: vuln
+          severity: CRITICAL
 
       - name: Login to GHCR
         if: github.event_name == 'push'

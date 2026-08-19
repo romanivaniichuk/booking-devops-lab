@@ -1,4 +1,4 @@
-FROM python:3.14-slim AS builder
+FROM python:3.14-slim-bookworm AS builder
 
 WORKDIR /build
 
@@ -8,7 +8,7 @@ RUN python -m venv /opt/venv \
     && /opt/venv/bin/pip install --no-cache-dir -r requirements.txt
 
 
-FROM python:3.14-slim AS runtime
+FROM python:3.14-slim-bookworm AS runtime
 
 ENV PATH="/opt/venv/bin:$PATH" \
     PYTHONDONTWRITEBYTECODE=1 \
