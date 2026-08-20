@@ -7,3 +7,8 @@ __pycache__/
 htmlcov/
 .vscode/
 .idea/
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+crash.log
