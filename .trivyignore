@@ -1,0 +1,7 @@
+# 2026-08-20: False positive from third-party SBOM.
+# Runtime verification showed msgpack is not installed.
+GHSA-6v7p-g79w-8964
+
+# 2026-08-20: False positive from third-party SBOM.
+# Runtime verification showed setuptools is not installed.
+CVE-2025-47273
