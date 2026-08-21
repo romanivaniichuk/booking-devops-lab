@@ -1,0 +1,46 @@
+replicaCount: 2
+
+image:
+  repository: ghcr.io/romanivaniichuk/booking-devops-lab
+  tag: ""
+  pullPolicy: IfNotPresent
+
+service:
+  port: 80
+  targetPort: 8000
+
+ingress:
+  enabled: true
+  className: traefik
+  host: ""
+
+tls:
+  enabled: true
+  clusterIssuer: booking-letsencrypt-staging
+  secretName: booking-tls
+  email: ""
+
+postgres:
+  image: postgres:17-alpine
+  database: booking_db
+  user: booking
+  password: ""
+  storageClass: local-path
+  storageSize: 2Gi
+
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
+app:
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 250m
+      memory: 256Mi
