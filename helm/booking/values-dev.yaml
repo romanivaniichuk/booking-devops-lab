@@ -1,0 +1,46 @@
+replicaCount: 1
+
+image:
+  repository: booking-devops-lab
+  tag: dev
+  pullPolicy: IfNotPresent
+
+service:
+  port: 80
+  targetPort: 8000
+
+ingress:
+  enabled: true
+  className: traefik
+  host: booking.localhost
+
+tls:
+  enabled: false
+  clusterIssuer: booking-letsencrypt-staging
+  secretName: booking-tls
+  email: ""
+
+postgres:
+  image: postgres:17-alpine
+  database: booking_db
+  user: booking
+  password: dev_only_password
+  storageClass: local-path
+  storageSize: 1Gi
+
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
+app:
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 250m
+      memory: 256Mi

@@ -1,0 +1,29 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: booking-app-alert
+  namespace: booking
+  labels:
+    release: monitoring
+
+spec:
+  groups:
+    - name: booking-app
+
+      rules:
+        - alert: BookingAppUnavailable
+
+          expr: |
+            kube_deployment_status_replicas_available{
+              namespace="booking",
+              deployment="booking-app"
+            } < 1
+
+          for: 2m
+
+          labels:
+            severity: warning
+
+          annotations:
+            summary: Booking application is unavailable
+            description: No booking-app replica has been available for more than 2 minutes.
