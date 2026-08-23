@@ -125,7 +125,7 @@ cd booking-devops-lab
 Create the Python environment and install dependencies:
 python3 -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt
+pip install -r requirements.txt -r requirements-dev.txt
 
 Run tests:
 make test
