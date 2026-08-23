@@ -1,0 +1,13 @@
+replicaCount: 1
+
+image:
+  repository: booking-devops-lab
+  tag: dev
+  pullPolicy: IfNotPresent
+
+service:
+  port: 80
+  targetPort: 8000
+
+monitoring:
+  enabled: false
