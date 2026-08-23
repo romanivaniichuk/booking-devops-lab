@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from sqlalchemy import text
 from sqlalchemy.exc import SQLAlchemyError
-
+from prometheus_fastapi_instrumentator import Instrumentator
 from app.db import engine
 from app.routers.bookings import router as bookings_router
 
@@ -9,7 +9,11 @@ from app.routers.bookings import router as bookings_router
 app = FastAPI(title="Booking DevOps Lab")
 
 app.include_router(bookings_router)
-
+Instrumentator().instrument(app).expose(
+    app,
+    endpoint="/metrics",
+    include_in_schema=False,
+)
 
 @app.get("/health")
 def health():
