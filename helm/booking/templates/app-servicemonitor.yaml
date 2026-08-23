@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: booking-app
+  labels:
+    release: monitoring
+
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: booking-app
+
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: 15s
