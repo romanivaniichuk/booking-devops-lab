@@ -10,12 +10,11 @@ metadata:
 spec:
   backoffLimit: 3
 
-
-template:
-  metadata:
-    labels:
-      app.kubernetes.io/name: booking-db-init
-      app.kubernetes.io/component: database-init
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: booking-db-init
+        app.kubernetes.io/component: database-init
 
     spec:
       restartPolicy: Never
@@ -26,16 +25,16 @@ template:
           image: "{{ .Values.image.repository }}:{{ required "image.tag is required" .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
 
-command:
-  - /bin/sh
-  - -c
-  - |
-    until python -c 'import socket; s=socket.create_connection(("booking-postgres", 5432), 2); s.close()'; do
-      echo "Waiting for PostgreSQL..."
-      sleep 2
-    done
+          command:
+            - /bin/sh
+            - -c
+            - |
+              until python -c 'import socket; s=socket.create_connection(("booking-postgres", 5432), 2); s.close()'; do
+                echo "Waiting for PostgreSQL..."
+                sleep 2
+              done
 
-    python -m app.init_db
+              python -m app.init_db
 
           env:
             - name: DATABASE_URL

@@ -11,16 +11,16 @@ spec:
   policyTypes:
     - Ingress
 
-ingress:
-  - from:
-      - podSelector:
-          matchLabels:
-            app.kubernetes.io/component: application
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/component: application
 
-      - podSelector:
-          matchLabels:
-            app.kubernetes.io/component: database-init
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/component: database-init
 
-    ports:
-      - protocol: TCP
-        port: 5432
+      ports:
+        - protocol: TCP
+          port: 5432

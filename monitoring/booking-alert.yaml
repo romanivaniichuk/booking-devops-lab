@@ -27,3 +27,22 @@ spec:
           annotations:
             summary: Booking application is unavailable
             description: No booking-app replica has been available for more than 2 minutes.
+
+        - alert: BookingAppOOMKilled
+
+          expr: |
+
+            kube_pod_container_status_last_terminated_reason{
+              namespace="booking",
+              pod=~"booking-app-.*",
+              reason="OOMKilled"
+            } > 0
+
+          for: 0m
+
+          labels:
+            severity: warning
+
+          annotations:
+            summary: Booking application container was OOMKilled
+            description: A booking-app container was terminated because it exceeded its memory limit.
