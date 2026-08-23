@@ -63,3 +63,10 @@ Check the latest Job:
 
 ```bash
 kubectl get jobs -n booking
+```
+
+Check Job logs:
+
+```bash
+kubectl logs -n booking job/booking-db-init
+```
