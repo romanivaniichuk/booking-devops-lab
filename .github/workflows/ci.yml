@@ -57,6 +57,12 @@ jobs:
             -f ./helm/booking/values-dev.yaml \
             > /dev/null
 
+      - name: Validate Grafana dashboard JSON
+        run: |
+          python -m json.tool \
+            monitoring/grafana/booking-dashboard.json \
+            > /dev/null
+
       - name: Build image
         run: docker build -t $IMAGE_NAME:${{ github.sha }} .
 
