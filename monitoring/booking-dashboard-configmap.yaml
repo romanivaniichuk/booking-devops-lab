@@ -1,0 +1,10 @@
+apiVersion: v1
+data:
+  booking-dashboard.json: |
+    jq empty monitoring/grafana/booking-dashboard.json
+kind: ConfigMap
+metadata:
+  labels:
+    grafana_dashboard: "1"
+  name: booking-grafana-dashboard
+  namespace: monitoring

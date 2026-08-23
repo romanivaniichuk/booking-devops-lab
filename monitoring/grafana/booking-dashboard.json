@@ -1,0 +1,1 @@
+jq empty monitoring/grafana/booking-dashboard.json

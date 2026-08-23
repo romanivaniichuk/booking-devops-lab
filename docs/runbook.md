@@ -53,3 +53,13 @@ kubectl rollout status deployment/booking-app -n booking
 helm history booking -n booking
 helm rollback booking REVISION -n booking
 ```
+
+## Database initialization
+
+Database tables are initialized automatically by the Helm
+`booking-db-init` Job during install and upgrade.
+
+Check the latest Job:
+
+```bash
+kubectl get jobs -n booking

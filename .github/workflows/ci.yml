@@ -43,6 +43,19 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt -r requirements-dev.txt
           pytest -q
+      - name: Set up Helm
+        uses: azure/setup-helm@v4
+
+      - name: Helm lint
+        run: |
+          helm lint ./helm/booking \
+            -f ./helm/booking/values-dev.yaml
+
+      - name: Helm template
+        run: |
+          helm template booking ./helm/booking \
+            -f ./helm/booking/values-dev.yaml \
+            > /dev/null
 
       - name: Build image
         run: docker build -t $IMAGE_NAME:${{ github.sha }} .
