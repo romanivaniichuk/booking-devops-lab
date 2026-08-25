@@ -149,3 +149,5 @@ Deployment is performed through the Makefile:
 make deploy IMAGE_TAG=<git-sha> TLS_ISSUER=booking-letsencrypt-prod 
 
 Infrastructure lifecycle is managed with Terraform.
+
+fix: update readiness probe
